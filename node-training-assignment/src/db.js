@@ -1,6 +1,7 @@
+require('dotenv').config();
 const mongoose = require('mongoose');
 
-const dbConnectionString = 'mongodb://localhost:27017/Users';
+const dbConnectionString = process.env.DB_URL;
 
 mongoose.connect(dbConnectionString, {
     useNewUrlParser: true,
