@@ -18,6 +18,15 @@ exports.findUserByEmail = async (email) => {
   }
 };
 
+exports.findUser = async (userData) => {
+  try {
+    const user = await User.findOne(userData);
+    return user;
+  } catch (error) {
+    throw error;
+  }
+};
+
 exports.findAllUser = async () => {
   try {
     const user = await User.find();

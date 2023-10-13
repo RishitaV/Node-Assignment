@@ -1,9 +1,17 @@
+const connectMongoDBSession = require('connect-mongodb-session');
 const session = require('express-session');
+const MongoDBStore = connectMongoDBSession(session);
+
+var store = new MongoDBStore({
+  uri: process.env.DB_URL,
+  collection: 'mySessions'
+});
 
 const sessionMiddleware = session({
-  secret: 'secret-key',
+  secret: 'your-secret-key',
   resave: false,
   saveUninitialized: true,
+  store: store,
   cookie: { secure: false },
 });
 

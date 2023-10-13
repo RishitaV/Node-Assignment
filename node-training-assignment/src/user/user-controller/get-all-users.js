@@ -2,13 +2,15 @@ const userMongo = require('../user-mongo');
 
 exports.getAllUsers = async (req, res) => {
   try {
-    console.log('I am in controller');
     const user = await userMongo.findAllUser();
-    console.log('I am in controller11');
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
-    res.status(200).json(user);
+    if (req.session && req.session.user) {
+      res.status(200).json(user);
+    } else {
+      res.send('Unauthorized access. Please log in.');
+    }
   } catch (err) {
     res.status(500).json({ error: 'An error occurred while fetching the user' });
   }
