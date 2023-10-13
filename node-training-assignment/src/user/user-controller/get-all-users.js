@@ -2,7 +2,9 @@ const userMongo = require('../user-mongo');
 
 exports.getAllUsers = async (req, res) => {
   try {
+    console.log('I am in controller');
     const user = await userMongo.findAllUser();
+    console.log('I am in controller11');
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }

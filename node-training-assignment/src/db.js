@@ -2,6 +2,7 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 
 const dbConnectionString = process.env.DB_URL;
+console.log('connectionString==>', dbConnectionString);
 
 mongoose.connect(dbConnectionString, {
     useNewUrlParser: true,
