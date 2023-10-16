@@ -1,10 +1,9 @@
-const {findUser} = require('../../user/user-mongo');
+const findUserUseCase = require('../../authentication/use-case/find-user-use-case');
 
-exports.loginCintroller = async (req, res) => {
-    const { userName, userPassword } = req.body;
-    const user = await findUser({ userName, userPassword });
-    if (user) {
-        req.session.user = user;
+exports.loginController = async (req, res) => {
+    const registeredUser = await findUserUseCase.execute(req.body);
+    if (registeredUser) {
+        req.session.user = registeredUser;
         res.status(200).json({ message: 'Login successful' });
     } else {
         res.status(401).json({ error: 'Invalid credentials' });

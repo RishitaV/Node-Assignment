@@ -1,10 +1,8 @@
-const userMongo = require('../user-mongo');
+const updateUserUseCase = require('../user-use-case/update-user-by-email-use-case');
 
 exports.updateUserByEmail = async (req, res) => {
-  const userEmail = req.params.userEmail;
-
   try {
-    const updatedUser = await userMongo.updateUserByEmail(userEmail , req.body);
+    const updatedUser = await updateUserUseCase.execute(req);
     if (!updatedUser) {
       return res.status(404).json({ error: 'User not found' });
     }

@@ -1,5 +1,3 @@
-const User = require('../../user/user-model');
-
 exports.logoutController = async (req, res) => {
     req.session.destroy((err) => {
         if (err) {

@@ -25,7 +25,6 @@ exports.getUserEmail = () => {
                 ownerEmail: '$owner.userEmail',
             },
         },
-
     ])
     }
 
