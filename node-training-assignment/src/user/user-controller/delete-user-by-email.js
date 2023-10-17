@@ -1,9 +1,8 @@
-const userMongo = require('../user-mongo');
+const deleteUserUseCase = require('../user-use-case/delete-user-use-case');
 
 exports.deleteUserByEmail = async (req, res) => {
-  const userEmail = req.params.userEmail;
   try {
-    const deletedUser = await userMongo.deleteUserByEmail(userEmail);
+    const deletedUser = await deleteUserUseCase.execute(req);
     if (!deletedUser) {
       return res.status(404).json({ error: 'User not found' });
     }

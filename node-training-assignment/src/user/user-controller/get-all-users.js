@@ -1,13 +1,17 @@
-const userMongo = require('../user-mongo');
+const getAllUsersUseCase = require('../user-use-case/get-all-users-use-case');
 
 exports.getAllUsers = async (req, res) => {
   try {
-    const user = await userMongo.findAllUser();
-    if (!user) {
-      return res.status(404).json({ error: 'User not found' });
+    const { users, isAuthenticated } = await getAllUsersUseCase.execute(req);
+    if (!users) {
+      return res.status(404).json({ error: 'Users not found' });
     }
-    res.status(200).json(user);
+    if (isAuthenticated) {
+      res.status(200).json(users);
+    } else {
+      res.send('Unauthorized access. Please log in.');
+    }
   } catch (err) {
-    res.status(500).json({ error: 'An error occurred while fetching the user' });
+    res.status(500).json({ error: 'An error occurred while fetching the users' });
   }
 };

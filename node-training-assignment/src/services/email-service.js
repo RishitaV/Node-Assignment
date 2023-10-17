@@ -4,7 +4,6 @@ const { getUserEmail } = require('../property/property-mongo');
 async function sendEmail(userEmail) {
     try {
         const result = await getUserEmail();
-        const userMail = result[0].ownerEmail;
 
         const transporter = nodemailer.createTransport({
             service: 'Gmail',
